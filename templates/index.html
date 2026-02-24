@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('static/img/banner_home.jpg');">
+    <div class="container hero-text">
+        <h1>Sabor Inconfundível para sua Festa</h1>
+        <p>Salgados fritos e assados com a tradição e qualidade que você confia.</p>
+        <div class="hero-btns">
+            <a href="/produtos" class="btn btn-primary">Ver Salgados</a>
+            <a href="/calculadora" class="btn btn-outline">Calcular Festa</a>
+        </div>
+    </div>
+</section>
+
+<section class="container info-highlights">
+    <div class="highlight">
+        <i class="fas fa-certificate"></i>
+        <h3>Qualidade</h3>
+        <p>Ingredientes frescos e selecionados.</p>
+    </div>
+    <div class="highlight">
+        <i class="fas fa-calculator"></i>
+        <h3>Orçamento Rápido</h3>
+        <p>Calcule exatamente o que precisa online.</p>
+    </div>
+    <div class="highlight">
+        <i class="fas fa-truck"></i>
+        <h3>Praticidade</h3>
+        <p>Encomende direto pelo WhatsApp.</p>
+    </div>
+</section>
+{% endblock %}

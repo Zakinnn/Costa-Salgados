@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-title">
+    <h1>Calcule Sua Festa</h1>
+</section>
+
+<section class="container calc-layout">
+    <div class="calc-main">
+        <div class="convidados-card">
+            <h3>1. Quantidade de Pessoas</h3>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Adultos</label>
+                    <input type="number" id="adultos" value="0" min="0" oninput="calcularTudo()">
+                </div>
+                <div class="input-group">
+                    <label>Crianças</label>
+                    <input type="number" id="criancas" value="0" min="0" oninput="calcularTudo()">
+                </div>
+            </div>
+            <p class="sugestao-text">Sugestão: 10 salgados por adulto e 6 por criança.</p>
+        </div>
+
+        <h3>2. Escolha os Salgados</h3>
+        <div class="calc-grid">
+            {% for p in produtos %}
+            <div class="calc-card">
+                <div class="calc-img">
+                    <img src="static/img/produto_{{ p.id }}.png" alt="{{ p.nome }}">
+                </div>
+                <div class="calc-info">
+                    <h4>{{ p.nome }}</h4>
+                    <p>R$ {{ "%.2f"|format(p.preco) }}</p>
+                    <input type="number" class="qtd-input" id="campo_{{ p.id }}" 
+                           data-preco="{{ p.preco }}" data-nome="{{ p.nome }}" value="0" min="0" oninput="calcularTudo()">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="calc-sidebar">
+        <div class="resumo-box">
+            <h3>Resumo</h3>
+            <hr>
+            <div class="resumo-item">
+                <span>Sugestão:</span>
+                <strong id="totalSugestao">0 Salgados</strong>
+            </div>
+            <div class="resumo-item">
+                <span>Selecionados:</span>
+                <strong id="totalQtd">0</strong>
+            </div>
+            <div class="resumo-item total-final">
+                <span>Total:</span>
+                <h2 id="totalPreco">R$ 0,00</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function calcularTudo() {
+    let totalPreco = 0;
+    let totalQtd = 0;
+
+    const inputs = document.querySelectorAll('.qtd-input');
+    inputs.forEach(input => {
+        let qtd = parseInt(input.value) || 0;
+        let preco = parseFloat(input.getAttribute('data-preco'));
+        totalPreco += (qtd * preco);
+        totalQtd += qtd;
+    });
+
+    const adultos = parseInt(document.getElementById('adultos').value) || 0;
+    const criancas = parseInt(document.getElementById('criancas').value) || 0;
+    const sugestao = (adultos * 10) + (criancas * 6);
+
+    document.getElementById('totalPreco').innerText = 'R$ ' + totalPreco.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+    document.getElementById('totalQtd').innerText = totalQtd;
+    document.getElementById('totalSugestao').innerText = sugestao + ' Salgados';
+}
+</script>
+{% endblock %}
