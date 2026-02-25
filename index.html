@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="icon" type="image/png" href="img/ico.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costa Salgados | O Melhor Sabor</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html"><img src="img/logo.png" alt="Costa Salgados"></a>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="produtos.html">Salgados</a></li>
+                <li><a href="calculadora.html">Calcule sua Festa</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+            <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/banner_home.jpg');">
+            <div class="container hero-text">
+                <h1>Sabor Inconfundível para sua Festa</h1>
+                <p>Salgados fritos e assados com a tradição e qualidade que você confia.</p>
+                <div class="hero-btns">
+                    <a href="produtos.html" class="btn btn-primary">Ver Salgados</a>
+                    <a href="calculadora.html" class="btn btn-outline">Calcular Festa</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container info-highlights">
+            <div class="highlight"><i class="fas fa-certificate"></i><h3>Qualidade</h3><p>Ingredientes frescos e selecionados.</p></div>
+            <div class="highlight"><i class="fas fa-calculator"></i><h3>Orçamento Rápido</h3><p>Calcule exatamente o que precisa online.</p></div>
+            <div class="highlight"><i class="fas fa-truck"></i><h3>Praticidade</h3><p>Encomende direto pelo WhatsApp.</p></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <h3>Costa Salgados</h3>
+                <p>Qualidade e tradição em cada mordida em Penápolis.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navegação</h4>
+                <a href="index.html">Home</a>
+                <a href="produtos.html">Cardápio</a>
+                <a href="calculadora.html">Calculadora</a>
+            </div>
+        </div>
+        <div class="bottom-bar"><p>&copy; 2026 Costa Salgados - Todos os direitos reservados.</p></div>
+    </footer>
+
+    <a href="https://wa.me/5518997174235?text=Olá! Vim pelo site." class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+    </script>
+</body>
+</html>

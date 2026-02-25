@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="icon" type="image/png" href="img/ico.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora | Costa Salgados</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo"><a href="index.html"><img src="img/logo.png" alt="Costa Salgados"></a></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="produtos.html">Salgados</a></li>
+                <li><a href="calculadora.html">Calcule sua Festa</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+            <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-title">
+            <h1>Calcule Sua Festa</h1>
+        </section>
+
+        <section class="container calc-layout">
+            <div class="calc-main">
+                <div class="convidados-card">
+                    <h3>1. Quantidade de Pessoas</h3>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Adultos</label>
+                            <input type="number" id="adultos" value="0" min="0" oninput="calcularTudo()">
+                        </div>
+                        <div class="input-group">
+                            <label>Crianças</label>
+                            <input type="number" id="criancas" value="0" min="0" oninput="calcularTudo()">
+                        </div>
+                    </div>
+                    <p class="sugestao-text">Sugestão: 10 salgados por adulto e 6 por criança.</p>
+                </div>
+
+                <h3>2. Escolha os Salgados</h3>
+                <div class="calc-grid" id="calc-grid-container"></div>
+            </div>
+
+            <div class="calc-sidebar">
+                <div class="resumo-box">
+                    <h3>Resumo</h3>
+                    <hr>
+                    <div class="resumo-item"><span>Sugestão:</span><strong id="totalSugestao">0 Salgados</strong></div>
+                    <div class="resumo-item"><span>Selecionados:</span><strong id="totalQtd">0</strong></div>
+                    <div class="resumo-item total-final"><span>Total:</span><h2 id="totalPreco">R$ 0,00</h2></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-about"><h3>Costa Salgados</h3><p>Qualidade e tradição em cada mordida em Penápolis.</p></div>
+            <div class="footer-links"><h4>Navegação</h4><a href="index.html">Home</a><a href="produtos.html">Cardápio</a><a href="calculadora.html">Calculadora</a></div>
+        </div>
+        <div class="bottom-bar"><p>&copy; 2026 Costa Salgados - Todos os direitos reservados.</p></div>
+    </footer>
+
+    <a href="https://wa.me/5518997174235?text=Olá! Vim pelo site." class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script src="js/dados.js"></script>
+    <script>
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+
+        const grid = document.getElementById('calc-grid-container');
+        
+        // Desenha os inputs da calculadora
+        PRODUTOS_COSTA.forEach(p => {
+            grid.innerHTML += `
+            <div class="calc-card">
+                <div class="calc-img"><img src="img/produto_${p.id}.png" alt="${p.nome}"></div>
+                <div class="calc-info">
+                    <h4>${p.nome}</h4>
+                    <p>R$ ${p.preco.toFixed(2).replace('.', ',')}</p>
+                    <input type="number" class="qtd-input" id="campo_${p.id}" data-preco="${p.preco}" data-nome="${p.nome}" value="0" min="0" oninput="calcularTudo()">
+                </div>
+            </div>`;
+        });
+
+        // Sua lógica original da calculadora
+        function calcularTudo() {
+            let totalPreco = 0;
+            let totalQtd = 0;
+
+            const inputs = document.querySelectorAll('.qtd-input');
+            inputs.forEach(input => {
+                let qtd = parseInt(input.value) || 0;
+                let preco = parseFloat(input.getAttribute('data-preco'));
+                totalPreco += (qtd * preco);
+                totalQtd += qtd;
+            });
+
+            const adultos = parseInt(document.getElementById('adultos').value) || 0;
+            const criancas = parseInt(document.getElementById('criancas').value) || 0;
+            const sugestao = (adultos * 10) + (criancas * 6);
+
+            document.getElementById('totalPreco').innerText = 'R$ ' + totalPreco.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            document.getElementById('totalQtd').innerText = totalQtd;
+            document.getElementById('totalSugestao').innerText = sugestao + ' Salgados';
+        }
+    </script>
+</body>
+</html>
